@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeb is here!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #2596be;
+            --primary-dark: #1a6d8a;
+            --bg: #0b0f1a;
+            --card-bg: #161b22;
+            --text: #f0f6fc;
+            --text-dim: #8b949e;
+            --border: #30363d;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .top-banner {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 0.6rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+
+        header {
+            padding: 5rem 0 3.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .ascii-art {
+            color: var(--primary);
+            font-family: 'Fira Code', monospace;
+            font-size: 9px;
+            line-height: 1.2;
+            white-space: pre;
+            margin-bottom: 2rem;
+            user-select: none;
+            display: block;
+            text-align: left;
+        }
+
+        h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 0.5rem; }
+        .hero-desc { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 2rem; max-width: 500px; }
+
+        .btn-group { display: flex; gap: 1rem; margin-bottom: 4rem; }
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { border: 1px solid var(--border); color: var(--text); }
+        .btn:hover { opacity: 0.8; transform: translateY(-1px); }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .card i { color: var(--primary); margin-bottom: 1rem; }
+        .card h3 { margin-bottom: 0.5rem; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; }
+
+        .install-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            display: flex;
+            overflow: hidden;
+            min-height: 320px;
+            margin-bottom: 5rem;
+        }
+
+        .install-steps { width: 40%; background: #0d1117; border-right: 1px solid var(--border); }
+        .step-item {
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border);
+            border-left: 3px solid transparent;
+            transition: 0.2s;
+        }
+        .step-item.active { background: rgba(37, 150, 190, 0.08); border-left-color: var(--primary); }
+        .step-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.2rem; color: var(--text); }
+        .step-item p { font-size: 0.8rem; color: var(--text-dim); }
+
+        .install-code {
+            width: 60%;
+            background: #000;
+            padding: 2.5rem;
+            display: flex;
+            align-items: center;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        .code-content { display: none; width: 100%; }
+        .code-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+        .terminal-link { color: var(--primary); text-decoration: none; }
+        .terminal-link:hover { text-decoration: underline; }
+        .keyword { color: #ff7b72; }
+        .string { color: #a5d6ff; }
+        .comment { color: #8b949e; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+        .footer-badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-badges img { height: 25px; border-radius: 4px; }
+        .footer-credits a { color: var(--text); text-decoration: none; font-weight: 600; }
+        .footer-credits a:hover { color: var(--primary); }
+
+        @media (max-width: 768px) {
+            .install-box { flex-direction: column; }
+            .install-steps, .install-code { width: 100%; }
+            .install-steps { border-right: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-banner">
+    🐑 Jeb released! Download the latest version and have fun
+</div>
+
+<div class="container">
+    <header>
+        <pre class="ascii-art">
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⢴⢺⠳⣭⢟⠢⡀
+⠀⠀⠀⠀⠀⠀⡔⠉⠀⡰⠺⣍⡿⢞⣖⢓⢻⡀
+⠀⠀⠀⠀⠀⠀⠑⠀⢊⣄⢀⡈⠓⢺⡀⡾⢼⢀⣀
+⠀⠀⠀⠀⠀⠀⠀⠀⡏⠉⠙⠀⢰⡀⡀⡠⠘⣭⣽⢿⣯⡖⢦⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⢡⢠⡀⠀⠀⣩⡞⡇⠀⣟⣖⢹⢭⣏⡏⣽⡀
+⠀⠀⠀⠀⠀⠀⠀⠀⡆⡛⣶⣲⣪⡟⡿⢍⣾⣞⣩⡟⠷⠔⢈⣄⠇
+⠀⠀⠀⠀⠀⠀⠀⠀⢹⣻⣌⣖⡿⢮⢗⢵⣻⠧⣾⣮⣭⡽⡦⣼⠂
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣦⠦⠓⣔⣣⠭⣞⣳⠾⢏⣧⣛⠏
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡏⡏⡇⡵⠋⠁⠈⡍⡏⡏⢹
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠷⠇⠷⡦⠀⠀⠀⠷⠇⠱⠾</pre>
+        <h1>Jeb Bot</h1>
+        <p class="hero-desc">The simplest way to manage custom colors on Discord.</p>
+        <div class="btn-group">
+            <a href="https://github.com/efelleto/Jeb" class="btn btn-primary"><i data-lucide="github"></i> Repository</a>
+            <a href="#setup" class="btn btn-secondary"><i data-lucide="terminal"></i> Get Started</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="card">
+            <i data-lucide="palette"></i>
+            <h3>Custom Colors</h3>
+            <p>Simple /color command for members with automatic role management.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="sparkles"></i>
+            <h3>Easy to use</h3>
+            <p>Interactive dashboard with buttons. No complicated commands or messy text files.</p>
+        </div>
+        <div class="card">
+            <i data-lucide="shield-check"></i>
+            <h3>Open Source</h3>
+            <p>Fully transparent code. Host it yourself and keep total control.</p>
+        </div>
+    </section>
+
+    <div id="setup" class="install-box">
+        <aside class="install-steps">
+            <div class="step-item active">
+                <h4>Requirements</h4>
+                <p>What you need to start.</p>
+            </div>
+            <div class="step-item">
+                <h4>Initialization</h4>
+                <p>Download and generate.</p>
+            </div>
+            <div class="step-item">
+                <h4>Configuration</h4>
+                <p>Insert your token.</p>
+            </div>
+            <div class="step-item">
+                <h4>Deployment</h4>
+                <p>Go live on Discord.</p>
+            </div>
+        </aside>
+
+        <main class="install-code">
+            <div class="code-content active">
+                <span class="comment"># Prerequisites:</span><br>
+                <span class="keyword">></span> <a href="https://www.oracle.com/java/technologies/downloads/" target="_blank" class="terminal-link">Java 17 or higher</a><br>
+                <span class="keyword">></span> <a href="https://discord.com/developers/applications" target="_blank" class="terminal-link">Discord Bot Token</a>
+            </div>
+            <div class="code-content">
+                <span class="comment"># Download the JAR and run to generate files</span><br>
+                java -jar <span class="string">jeb-1.1.0.jar</span>
+            </div>
+            <div class="code-content">
+                <span class="comment"># Open config.yml and paste your token</span><br>
+                <span class="keyword">token:</span> <span class="string">"YOUR_TOKEN_HERE"</span>
+            </div>
+            <div class="code-content">
+                <span class="comment"># Restart to start coloring!</span><br>
+                java -jar <span class="string">jeb-1.1.0.jar</span>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-badges">
+            <img src="https://img.shields.io/badge/Kotlin-1.9+-purple?style=flat&logo=kotlin" alt="Kotlin">
+            <img src="https://img.shields.io/badge/JDA-5.x-blue?style=flat&logo=discord" alt="JDA">
+            <img src="https://img.shields.io/badge/Java-17+-orange?style=flat&logo=openjdk" alt="Java">
+        </div>
+        <p class="footer-credits">
+            Made in 🇧🇷 by <a href="https://github.com/efelleto" target="_blank">Eduardo Felleto</a>
+        </p>
+    </footer>
+</div>
+
+<script>
+    lucide.createIcons();
+
+    const steps = document.querySelectorAll('.step-item');
+    const contents = document.querySelectorAll('.code-content');
+
+    steps.forEach((step, index) => {
+        step.addEventListener('click', () => {
+            steps.forEach(s => s.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            step.classList.add('active');
+            contents[index].classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
