@@ -29,5 +29,5 @@ jobs:
         with:
           token: ${{ secrets.DISCLOUD_TOKEN }}
           glob: |
-            build/libs/jeb-*.jar
+            build/libs/jeb-1.0.0.jar
             discloud.config
