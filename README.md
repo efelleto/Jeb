@@ -6,7 +6,7 @@
 
 **Jeb** is a lightweight, efficient Discord bot designed to give your community a splash of personality. It allows users with specific permissions to create and manage their own unique color roles via hex codes.
 
-> 🌐 **Check out the official website:** [efelleto.github.io/Jeb](https://efelleto.github.io/Jeb/)
+> **Check out the official website:** [efelleto.github.io/Jeb](https://efelleto.github.io/Jeb/)
 
 ---
 
