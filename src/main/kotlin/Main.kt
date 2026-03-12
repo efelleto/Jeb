@@ -22,8 +22,23 @@ fun main() {
     System.setOut(PrintStream(System.out, true, "UTF-8"))
     System.setErr(PrintStream(System.err, true, "UTF-8"))
 
-    if (!ConfigManager.setup()) return
-    val token = ConfigManager.loadToken()
+    // Try to obtain the token from the environment variables first (Fallback).
+    val envToken = System.getenv("BOT_TOKEN")
+
+    val token = if (envToken != null && envToken.isNotBlank()) {
+        log("ENV", "Using token from environment variables.")
+        envToken
+    } else {
+        // If the variable does not exist, the original setup flow from the file is followed.
+        if (!ConfigManager.setup()) return
+        ConfigManager.loadToken()
+    }
+
+        // Security check to ensure the token is valid
+        if (token == null || token.isEmpty() || token == "YOUR_BOT_TOKEN_HERE") {
+        logError("AUTH", "Token not found! Set BOT_TOKEN environment variable or edit config.yml.")
+        return
+    }
 
     showBanner()
 
