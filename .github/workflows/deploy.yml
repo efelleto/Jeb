@@ -24,10 +24,13 @@ jobs:
       - name: Build shadow JAR
         run: ./gradlew shadowJar
 
+      - name: Prepare JAR for Deploy
+        run: cp build/libs/jeb-1.0.0.jar ./jeb-1.0.0.jar
+
       - name: Deploy to Discloud
         uses: discloud/deploy-action@v1
         with:
           token: ${{ secrets.DISCLOUD_TOKEN }}
           glob: |
-            build/libs/jeb-1.0.0.jar
+            jeb-1.0.0.jar
             discloud.config
