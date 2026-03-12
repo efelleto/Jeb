@@ -14,11 +14,18 @@ class ColorCommand : ListenerAdapter() {
 
         val guild = event.guild ?: return
         val member = event.member ?: return
+        val config = ConfigManager.getConfig(guild.id)
+
+        // Allowed channel check
+        if (config.allowedChannelId != null && event.channel.id != config.allowedChannelId) {
+            event.reply("❌ **»** You can only use this command in <#${config.allowedChannelId}>.")
+                .setEphemeral(true).queue()
+            return
+        }
+
         event.deferReply(true).queue()
 
-        val config = ConfigManager.getConfig(guild.id)
         val permissionRoleId = config.permissionRoleId
-
         if (permissionRoleId == null) {
             event.hook.sendMessage("⚠️ **»** Jeb has not been configured yet. Ask an admin to run `/jeb` first.")
                 .setEphemeral(true).queue()

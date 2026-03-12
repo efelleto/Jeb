@@ -9,7 +9,8 @@ import java.io.FileInputStream
 data class GuildConfig(
     val guildId: String,
     var permissionRoleId: String? = null,
-    var staffRoleId: String? = null
+    var staffRoleId: String? = null,
+    var allowedChannelId: String? = null
 )
 
 object ConfigManager {
@@ -18,7 +19,6 @@ object ConfigManager {
     private val dataFile = File("data.json")
     private val configs: MutableMap<String, GuildConfig> = loadAll()
 
-    // Returns false if config was just created (first run)
     fun setup(): Boolean {
         if (!configFile.exists()) {
             configFile.writeText("""
@@ -48,6 +48,11 @@ object ConfigManager {
 
     fun setStaffRole(guildId: String, roleId: String) {
         getConfig(guildId).staffRoleId = roleId
+        save()
+    }
+
+    fun setAllowedChannel(guildId: String, channelId: String?) {
+        getConfig(guildId).allowedChannelId = channelId
         save()
     }
 

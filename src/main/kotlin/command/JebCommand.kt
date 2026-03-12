@@ -47,7 +47,7 @@ class JebCommand : ListenerAdapter() {
                     .setRequiredRange(1, 1)
                     .build()
 
-                event.reply("Select the **Permission Role** — members with this role will be able to use `/color`:")
+                event.reply("Select the **Permission Role**. Members with this role will be able to use `/color`:")
                     .setComponents(ActionRow.of(menu))
                     .setEphemeral(true)
                     .queue()
@@ -59,7 +59,19 @@ class JebCommand : ListenerAdapter() {
                     .setRequiredRange(1, 1)
                     .build()
 
-                event.reply("Select the **Staff Role** — members with this role will be able to use `/jeb`:")
+                event.reply("Select the **Staff Role**. Members with this role will be able to use `/jeb`:")
+                    .setComponents(ActionRow.of(menu))
+                    .setEphemeral(true)
+                    .queue()
+            }
+
+            "jeb_set_allowed_channel" -> {
+                val menu = EntitySelectMenu.create("jeb_select_allowed_channel", EntitySelectMenu.SelectTarget.CHANNEL)
+                    .setPlaceholder("Select the color command channel")
+                    .setRequiredRange(1, 1)
+                    .build()
+
+                event.reply("Select the **Allowed Channel**. Members will only be able to use `/color` there:")
                     .setComponents(ActionRow.of(menu))
                     .setEphemeral(true)
                     .queue()
@@ -81,7 +93,7 @@ class JebCommand : ListenerAdapter() {
                 event.deferReply(true).queue()
                 val role = event.mentions.roles[0]
                 ConfigManager.setPermissionRole(guild.id, role.id)
-                event.hook.sendMessage("✅ **»** Permission Role set to ${role.asMention}. Members with this role can now use `/color`.")
+                event.hook.sendMessage("✅ **»** Permission Role set to ${role.asMention}.")
                     .setEphemeral(true).queue()
             }
 
@@ -89,7 +101,15 @@ class JebCommand : ListenerAdapter() {
                 event.deferReply(true).queue()
                 val role = event.mentions.roles[0]
                 ConfigManager.setStaffRole(guild.id, role.id)
-                event.hook.sendMessage("✅ **»** Staff Role set to ${role.asMention}. Members with this role can now use `/jeb`.")
+                event.hook.sendMessage("✅ **»** Staff Role set to ${role.asMention}.")
+                    .setEphemeral(true).queue()
+            }
+
+            "jeb_select_allowed_channel" -> {
+                event.deferReply(true).queue()
+                val channel = event.mentions.channels[0]
+                ConfigManager.setAllowedChannel(guild.id, channel.id)
+                event.hook.sendMessage("✅ **»** Allowed Channel set to ${channel.asMention}.")
                     .setEphemeral(true).queue()
             }
         }
@@ -100,23 +120,26 @@ class JebCommand : ListenerAdapter() {
 
         val permissionRole = if (config.permissionRoleId != null) "<@&${config.permissionRoleId}>" else "`Not configured`"
         val staffRole = if (config.staffRoleId != null) "<@&${config.staffRoleId}>" else "`Not configured`"
+        val allowedChannel = if (config.allowedChannelId != null) "<#${config.allowedChannelId}>" else "`All channels`"
 
         val embed = EmbedBuilder()
-            .setTitle("🐑 Jeb — Configuration Panel")
+            .setTitle("🐑 Jeb | Configuration Panel")
             .setDescription("Manage the bot settings for this server.")
             .setColor(Color.decode("#2596be"))
             .addField("🎨 Permission Role", "$permissionRole\nMembers with this role can use `/color`.", false)
             .addField("🛡️ Staff Role", "$staffRole\nMembers with this role can use `/jeb`.", false)
-            .setFooter("Jeb — A rainbow a day keeps the crackers away.")
+            .addField("📍 Allowed Channel", "$allowedChannel\nChannel where `/color` is allowed.", false)
+            .setFooter("Jeb. Every server deservers a little color.")
             .build()
 
         hook.editOriginalEmbeds(embed)
             .setComponents(
                 ActionRow.of(
-                    Button.secondary("jeb_set_permission_role", "🎨 Set Permission Role"),
-                    Button.secondary("jeb_set_staff_role", "🛡️ Set Staff Role"),
-                    Button.primary("jeb_refresh", "🔄 Refresh")
-                )
+                    Button.secondary("jeb_set_permission_role", "🎨 Role"),
+                    Button.secondary("jeb_set_staff_role", "🛡️ Staff"),
+                    Button.secondary("jeb_set_allowed_channel", "📍 Channel")
+                ),
+                ActionRow.of(Button.primary("jeb_refresh", "🔄 Refresh"))
             ).queue()
     }
 }
