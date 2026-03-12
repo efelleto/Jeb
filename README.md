@@ -1,9 +1,12 @@
 # 🐑 Jeb: Discord Color Bot
 
-![Jeb Banner](https://img.shields.io/badge/JDA-5.x-blue?style=for-the-badge&logo=discord)
+[![Website](https://img.shields.io/badge/Website-Live-2596be?style=for-the-badge&logo=google-chrome&logoColor=white)](https://efelleto.github.io/Jeb/)
+![JDA](https://img.shields.io/badge/JDA-5.x-blue?style=for-the-badge&logo=discord)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9+-purple?style=for-the-badge&logo=kotlin)
 
 **Jeb** is a lightweight, efficient Discord bot designed to give your community a splash of personality. It allows users with specific permissions to create and manage their own unique color roles via hex codes.
+
+> 🌐 **Check out the official website:** [efelleto.github.io/Jeb](https://efelleto.github.io/Jeb/)
 
 ---
 
