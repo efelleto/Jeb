@@ -46,4 +46,4 @@ bin/
 
 ### Jeb ###
 config.yml
-data.json
+data.json*.jar
